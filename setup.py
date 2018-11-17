@@ -24,7 +24,7 @@ setup(
             "scipy==1.1.0",
             "six==1.11.0",
             "whitenoise==4.1",
-            "nose"
+            "nose==1.3.7"
       ],
       test_suite='nose.collector',
       tests_require=['nose'],
