@@ -1,6 +1,6 @@
 import pandas as pd
 
-from . import preprocess
+import preprocess
 # from scripts.preprocess import PreProcess
 
 
@@ -10,7 +10,6 @@ from sklearn.externals import joblib
 from sklearn import svm
 from sklearn.naive_bayes import MultinomialNB
 
-from . import constants
 from copy import copy,deepcopy
 
 class TestData():
@@ -18,8 +17,7 @@ class TestData():
     def pre_process_data(self,data):
 
         #the pre processing part
-        column_name = data.columns[0]
-        # data=df
+        column_name = data.columns[0]        
         pre_processor = preprocess.PreProcess(data, column_name)    
 
         data = pre_processor.clean_html()
