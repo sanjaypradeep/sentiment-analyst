@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-import preprocess
+from sentimentanalyser import preprocess
 # from scripts.preprocess import PreProcess
 
 
@@ -185,4 +185,3 @@ class TestData():
 #     outputDir="/Users/amirulislam/Desktop/outputs"
     
 #     testedDataFrame = objTest.test_model(testText, test_file_name, test_reference_file,outputDir)
-

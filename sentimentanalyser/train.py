@@ -1,6 +1,5 @@
 import pandas as pd
-
-import preprocess
+from sentimentanalyser import preprocess
 ## from preprocess import PreProcess
 
 from sklearn.model_selection import train_test_split
@@ -152,7 +151,3 @@ class Train():
 # 	outputDir="/Users/amirulislam/Desktop/outputs"
 
 # 	objTrain.train_file_model(filePath,outputDir)
-
-
-
-
