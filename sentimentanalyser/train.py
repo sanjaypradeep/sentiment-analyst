@@ -54,7 +54,7 @@ class Train():
 
 
 	#this function is the entry point for training
-	def train_file_model(self, filePath,outputDir):
+	def train_file_model(self, filePath,outputDir,usable_columns=None):
 
 		print("inside the Train File Model ....")
 
@@ -108,8 +108,12 @@ class Train():
 		print(data.head())
 
 		# why only 2 columns all the time? what if the file has more than 2 columns?
-		col1=data.columns[0]
-		col2=data.columns[1]
+		if usable_columns is not None:
+			col1=usable_columns[0]
+			col2=usable_columns[1]
+		else:
+			col1=data.columns[0]
+			col2=data.columns[1]
 
 
 
@@ -149,5 +153,15 @@ class Train():
 
 # 	filePath="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_train.csv"
 # 	outputDir="/Users/amirulislam/Desktop/outputs"
+# 	usable_columns=["tweet","category"]
+
+# 	objTrain.train_file_model(filePath,outputDir,usable_columns)
+
+# 	print("training done for twitter")
+
+# 	filePath="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/bbc_dataset.csv"
+# 	outputDir="/Users/amirulislam/Desktop/outputs"
+	
 
 # 	objTrain.train_file_model(filePath,outputDir)
+# 	print("training done for bbc")
