@@ -143,15 +143,15 @@ class Train():
 
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
 
-	objTrain = Train()
+# 	objTrain = Train()
 
-	filePath="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_train.csv"
-	outputDir="/Users/amirulislam/Desktop/outputs"
+# 	filePath="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_train.csv"
+# 	outputDir="/Users/amirulislam/Desktop/outputs"
 
-	objTrain.train_file_model(filePath,outputDir)
+# 	objTrain.train_file_model(filePath,outputDir)
 
 
 

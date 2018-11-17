@@ -153,36 +153,36 @@ class TestData():
     
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
 
-    objTest = TestData()
+#     objTest = TestData()
 
-    testText=""
-    test_file_name="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_test_unlabeled.csv"
-    test_reference_file="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_train.csv"
-    outputDir="/Users/amirulislam/Desktop/outputs"
+#     testText=""
+#     test_file_name="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_test_unlabeled.csv"
+#     test_reference_file="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_train.csv"
+#     outputDir="/Users/amirulislam/Desktop/outputs"
 
-    testedDataFrame=objTest.test_model(testText,test_file_name,test_reference_file,outputDir)
+#     testedDataFrame=objTest.test_model(testText,test_file_name,test_reference_file,outputDir)
 
 
-    print("result for input file is")
-    print(testedDataFrame.head())
+#     print("result for input file is")
+#     print(testedDataFrame.head())
 
-    testText = '''
-    Sir Kenny received the honour from Prince Charles during a ceremony at Buckingham Palace.
+#     testText = '''
+#     Sir Kenny received the honour from Prince Charles during a ceremony at Buckingham Palace.
 
-As a player, Sir Kenny helped Liverpool win three European Cups in seven years. He went on to successfully manage both Liverpool and Blackburn Rovers.
+# As a player, Sir Kenny helped Liverpool win three European Cups in seven years. He went on to successfully manage both Liverpool and Blackburn Rovers.
 
-Sir Kenny supported the families of the victims of the Hillsborough disaster and he and his wife Marina have raised more than £10m for charity.
+# Sir Kenny supported the families of the victims of the Hillsborough disaster and he and his wife Marina have raised more than £10m for charity.
 
-Also being honoured during the investiture at Buckingham Palace, were actor Tom Hardy, footballer Jermain Defoe, television historian Lucy Worsley and entrepreneur Jo Malone.
+# Also being honoured during the investiture at Buckingham Palace, were actor Tom Hardy, footballer Jermain Defoe, television historian Lucy Worsley and entrepreneur Jo Malone.
 
-Kenny Dalglish's honour was for "services to football, charity, and the city of Liverpool".
-'''
-    test_file_name = None
-    test_reference_file = "/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/bbc_dataset.csv"
-    outputDir="/Users/amirulislam/Desktop/outputs"
+# Kenny Dalglish's honour was for "services to football, charity, and the city of Liverpool".
+# '''
+#     test_file_name = None
+#     test_reference_file = "/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/bbc_dataset.csv"
+#     outputDir="/Users/amirulislam/Desktop/outputs"
     
-    testedDataFrame = objTest.test_model(testText, test_file_name, test_reference_file,outputDir)
+#     testedDataFrame = objTest.test_model(testText, test_file_name, test_reference_file,outputDir)
 
