@@ -1,5 +1,5 @@
 import pandas as pd
-
+import os
 import preprocess
 # from scripts.preprocess import PreProcess
 
@@ -10,6 +10,7 @@ from sklearn.externals import joblib
 from sklearn import svm
 from sklearn.naive_bayes import MultinomialNB
 
+# from . import constants
 from copy import copy,deepcopy
 
 class TestData():
@@ -17,7 +18,8 @@ class TestData():
     def pre_process_data(self,data):
 
         #the pre processing part
-        column_name = data.columns[0]        
+        column_name = data.columns[0]
+        # data=df
         pre_processor = preprocess.PreProcess(data, column_name)    
 
         data = pre_processor.clean_html()
@@ -32,12 +34,43 @@ class TestData():
 
 
 
-    def test_model(self,test_text, test_file_name, test_reference_file):
+    def test_model(self,test_text, test_file_name, test_reference_file,outputDir):
         #returns dataframe with label, status as True or False, 
 
-        print("text is ",test_text," test file is ",test_file_name," reference file is ",test_reference_file," list of models ",models_list)
-        print("constant = ",constants.vectorlibs_location,constants.trained_models_location)
+        print("text is ",test_text," test file is ",test_file_name," reference file is ",test_reference_file)
+        # print("constant = ",constants.vectorlibs_location,constants.trained_models_location)
         identifier=test_reference_file
+
+
+
+        ###############################################################################
+        # Set up source areas/output areas
+        ###############################################################################
+
+        folder,fileNameEx=os.path.split(test_reference_file)
+        referFilenameNoExtn=fileNameEx.split(".")[0]
+        print("Reference filename without extn is ",referFilenameNoExtn)
+
+
+        storage_location=str(outputDir)+"/"+referFilenameNoExtn+"/"
+        if not os.path.exists(storage_location):
+            print("cannot find pkls at ",storage_location)
+
+
+        if test_file_name!=None:
+            folderTest,fileNameExTest=os.path.split(test_file_name)
+            testFilenameNoExtn=fileNameExTest.split(".")[0]
+        else:
+            testFilenameNoExtn="None"
+
+
+
+
+        
+
+
+
+
 
         test_is_a_file=False
         #this flag becomes true if test data is a csv file
@@ -55,7 +88,7 @@ class TestData():
                 print("Generating the dataframe from text")
                 data = {'Text': [test_text]}
                 dataFrame = pd.DataFrame(data=data)
-                print("Done")
+                print("Done converting string to dataframe")
                 print(dataFrame.head())
 
         #need to consider file
@@ -78,14 +111,15 @@ class TestData():
 
 
         #now work on the dataframe df
-        vectorizer= identifier+'_vectorizer.pkl'
+        vectorizer= storage_location+'vectorizer.pkl'
+        print("the vectorizer is "+str(vectorizer))
         tfidf_transformer = joblib.load(vectorizer)
         
         print("Loaded vectorizer ",vectorizer)
         print(vectorizer)
 
         #pre process data 
-        data=pre_process_data(dataFrame)
+        data=self.pre_process_data(dataFrame)
         print("After pre processing")
         print(data.head(5))
 
@@ -99,7 +133,8 @@ class TestData():
         print(dataFramebackUp.head(5))
 
         for model_name in ['SVM','Naive-Bayes']:
-            model_file= str(identifier)+"_"+str(model_name)+".pkl"
+            model_file= storage_location+str(model_name)+".pkl"
+            print("going for model pkl at",model_file)
             model=joblib.load(model_file)
             print("Loaded ",model_file)
             output=model.predict(data_check)
@@ -111,7 +146,9 @@ class TestData():
         print(dataFramebackUp.head())
 
         #write to file
-        dataFramebackUp.to_csv(constants.output_results_location+str(test_file_name)+"_results.csv")
+        dataFramebackUp.to_csv(storage_location+ str(testFilenameNoExtn)+"_results.csv")
+        print("result stored at "+storage_location+ str(testFilenameNoExtn)+"_results.csv")
+        print("_______________________")
         return dataFramebackUp
     
 
@@ -119,10 +156,33 @@ class TestData():
 if __name__ == "__main__":
 
 
-    objTest = Test()
-    testText=""
-    test_file_name=""
-    test_reference_file=""
+    objTest = TestData()
 
-    trainedDataFrame=objTest.test_model(testText,test_file_name,test_reference_file)
+    testText=""
+    test_file_name="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_test_unlabeled.csv"
+    test_reference_file="/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/twitter_train.csv"
+    outputDir="/Users/amirulislam/Desktop/outputs"
+
+    testedDataFrame=objTest.test_model(testText,test_file_name,test_reference_file,outputDir)
+
+
+    print("result for input file is")
+    print(testedDataFrame.head())
+
+    testText = '''
+    Sir Kenny received the honour from Prince Charles during a ceremony at Buckingham Palace.
+
+As a player, Sir Kenny helped Liverpool win three European Cups in seven years. He went on to successfully manage both Liverpool and Blackburn Rovers.
+
+Sir Kenny supported the families of the victims of the Hillsborough disaster and he and his wife Marina have raised more than £10m for charity.
+
+Also being honoured during the investiture at Buckingham Palace, were actor Tom Hardy, footballer Jermain Defoe, television historian Lucy Worsley and entrepreneur Jo Malone.
+
+Kenny Dalglish's honour was for "services to football, charity, and the city of Liverpool".
+'''
+    test_file_name = None
+    test_reference_file = "/Users/amirulislam/projects/built_apps/doc_classific_expanded/source samples/bbc_dataset.csv"
+    outputDir="/Users/amirulislam/Desktop/outputs"
+    
+    testedDataFrame = objTest.test_model(testText, test_file_name, test_reference_file,outputDir)
 
