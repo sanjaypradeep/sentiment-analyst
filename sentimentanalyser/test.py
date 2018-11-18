@@ -47,8 +47,9 @@ class TestData():
         # Set up source areas/output areas
         ###############################################################################
 
-        folder,fileNameEx=os.path.split(test_reference_file)
-        referFilenameNoExtn=fileNameEx.split(".")[0]
+        # folder,fileNameEx=os.path.split(test_reference_file)
+        # referFilenameNoExtn=fileNameEx.split(".")[0]
+        referFilenameNoExtn=test_reference_file
         print("Reference filename without extn is ",referFilenameNoExtn)
 
 
